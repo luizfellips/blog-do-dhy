@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('noticias', function (Blueprint $table) {
-            $table->string('imagem')->nullable();
+            $table->string('slug')->unique()->after('id')->nullable();
         });
     }
 
@@ -21,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('noticias', function (Blueprint $table) {
+            $table->dropColumn('slug');
+        });
     }
 };

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [NoticiaController::class, 'index'])->name('home');
+Route::get('noticias/{titulo}', [NoticiaController::class, 'showBySlug'])->name('noticia.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

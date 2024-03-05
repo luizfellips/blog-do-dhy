@@ -9,8 +9,14 @@ class Noticia extends Model
 {
     use HasFactory;
 
+    public function getRouteKeyName()
+    {
+        return 'titulo';
+    }
+
     protected $fillable = [
         'titulo',
+        'slug',
         'subtitulo',
         'corpo',
         'imagem'
