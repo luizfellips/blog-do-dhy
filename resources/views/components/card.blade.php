@@ -11,7 +11,7 @@
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="image col-md-5">
-                <img src="img/placeholder.jpeg" class="img-fluid" alt="...">
+                <img src="{{ asset($noticia->imagem) ?? asset('img/placeholder.png')}}" class="img-fluid" alt="...">
             </div>
             <div class="col-md-7">
                 <div class="card-body">

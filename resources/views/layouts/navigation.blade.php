@@ -1,7 +1,7 @@
 <!--navbar-->
 <nav class="navbar navbar-expand-lg fixed-top bg-primary-color" id="navbar">
     <div class="container py-2 align-items-center">
-        <a href="#" class="navbar-brand primary-color">
+        <a href="{{route('home')}}" class="navbar-brand primary-color">
             <h1 class="display-5 mb-0">Blog Do Dhy</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-items"
