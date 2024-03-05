@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Author;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Noticia>
@@ -24,7 +25,7 @@ class NoticiaFactory extends Factory
             'titulo' => $titulo,
             'slug' => $slug,
             'subtitulo' => fake()->sentence(12),
-            'corpo' => fake()->text(255),
+            'corpo' => fake()->text(1500),
         ];
     }
 }

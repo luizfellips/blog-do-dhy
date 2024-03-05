@@ -1,6 +1,4 @@
 .image {
-    width: 200px;
-    height: 150px;
     .img-fluid {
         border-radius: 0;
         margin-bottom: 2em;
@@ -10,10 +8,14 @@
     }
 }
 
+.isShowPage {
+    width: 50%;
+}
+
 
 @media (min-width: 768px) and (max-width:1200px) {
     .image {
-        width: 150px;
+        width: 100%;
         height: auto;
     }
 }
@@ -39,10 +41,6 @@
 @media (max-width: 575px) {
     .col-xs {
         width: 50%;
-
-        .card {
-            height: 380px;
-        }
     }
 }
 
@@ -86,12 +84,5 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-    }
-}
-
-@media (min-width: 582px) and (max-width: 768px) {
-
-    .card .card-title {
-        font-size: 18px !important;
     }
 }

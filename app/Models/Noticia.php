@@ -19,8 +19,14 @@ class Noticia extends Model
         'slug',
         'subtitulo',
         'corpo',
-        'imagem'
+        'imagem',
+        'legenda_imagem'
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
 
     public function tags()
     {

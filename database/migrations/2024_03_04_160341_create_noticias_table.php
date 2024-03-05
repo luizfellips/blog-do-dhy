@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('noticias', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('author_id')->nullable(); // Add this line for the foreign key
+            $table->string('slug')->unique()->nullable();
             $table->string('titulo');
             $table->string('subtitulo');
             $table->longText('corpo');
+            $table->string('imagem')->nullable();
+            $table->string('legenda_imagem')->nullable();
             $table->timestamps();
         });
     }

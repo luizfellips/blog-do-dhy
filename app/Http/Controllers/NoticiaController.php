@@ -26,10 +26,14 @@ class NoticiaController extends Controller
     public function showBySlug($titulo) {
         $titulo = Str::slug($titulo);
 
-        $noticia = Noticia::where('slug', $titulo)->firstOrFail();
+        $noticia = Noticia::where('slug', $titulo)->with('author')->firstOrFail();
+        $noticiaKey = $noticia->getKey();
+
+    $noticias = Noticia::where('id', '<>', $noticiaKey)->limit(3)->get();
 
         return view('noticia.show', [
             'noticia' => $noticia,
+            'noticias' => $noticias
         ]);
     }
 }

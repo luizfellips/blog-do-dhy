@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('noticias', function (Blueprint $table) {
-            $table->string('imagem')->nullable();
+            $table->foreign('author_id')->references('id')->on('authors');
         });
     }
 
@@ -21,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('noticias', function (Blueprint $table) {
+            $table->dropForeign('noticias_author_id_foreign');
+        });
     }
 };
