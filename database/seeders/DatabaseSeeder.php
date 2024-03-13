@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Tag;
 use App\Models\Author;
 use App\Models\Noticia;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,5 +29,16 @@ class DatabaseSeeder extends Seeder
             $author = Author::inRandomOrder()->first();
             $noticia->author()->associate($author)->save();
         });
+
+        $noticias = Noticia::all();
+
+        // loop through all posts
+        foreach ($noticias as $noticia) {
+            // convert the title into a slug and save it to the slug field
+            $noticia->slug = Str::slug($noticia->titulo);
+
+            // save the post
+            $noticia->save();
+            }
     }
 }

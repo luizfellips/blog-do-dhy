@@ -15,5 +15,9 @@
         @foreach ($noticias as $noticia)
             <x-card :noticia="$noticia" extraClasses="{{$extraClasses ?? ''}}"/>
         @endforeach
+        <div class="links d-flex justify-content-center">
+            {{ $noticias->links() }}
+        </div>
     </div>
+
 </div>

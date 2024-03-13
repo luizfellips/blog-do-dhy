@@ -27,13 +27,10 @@
 
         <x-tags :tags="$noticia->tags" />
 
-        <div class="author">
-            <div class="author-image">
-                <img src="{{ asset($noticia->imagem) ?? asset('img/placeholder.png') }}" alt="Foto do Autor">
-            </div>
-            <div class="author-details">
-                <div class="author-name">Por {{$noticia->author->name}}, {{$noticia->author->job}}</div>
-                <div class="post-details">
+        <div class="author border-top mt-3 px-3">
+            <div class="author-details mt-4">
+                <div class="author-name text-muted">Por {{$noticia->author->name}}, {{$noticia->author->job}}</div>
+                <div class="post-details text-muted">
                     <span>{{ $createdAt }}</span>
                     •
                     <span>{{ $timeAgo }}</span>
@@ -46,7 +43,7 @@
             <a class="btn twitter" href="#!" role="button"><i class="bi bi-twitter-x fs-2"></i></a>
         </div>
 
-        <div class="container mt-5">
+        <div class="container mt-2">
             @php
                 $image = file_exists(asset($noticia->imagem)) ? asset($noticia->imagem) : asset('img/placeholder.png');
             @endphp
@@ -61,8 +58,8 @@
                     // Use regular expression to identify and replace bold and italic content
                     $paragraph = preg_replace('/\*(.*?)\*/', '<strong>$1</strong>', $paragraph);
                     $paragraph = preg_replace('/\_(.*?)\_/', '<i>$1</i>', $paragraph);
+                    $paragraph = preg_replace('/\--(.*?)\--/', '<div class="special-block">$1</div>', $paragraph);
                 @endphp
-
                 <p class="fs-5">{!! $paragraph !!}</p>
             @endforeach
         </div>

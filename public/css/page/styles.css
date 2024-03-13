@@ -51,6 +51,14 @@ body {
     background-color: #525ceb;
 }
 
+.special-block {
+    border-block: 1px black solid;
+    padding: 15px;
+    margin-block: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 #navbar a {
     color: #f8edff;
 }
