@@ -7,6 +7,7 @@
 
 <body style="padding-block-start: 120px;">
     <wrapper style="height: 100vh">
+        <x-flash-message />
         @include('layouts.navigation')
 
         <div id="main" class="container">

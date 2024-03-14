@@ -4,6 +4,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endpush
 
+    <a href="{{route('dashboard')}}" class="btn btn-primary">Voltar</a>
     <div class="my-4 flex items-center justify-center">
         <div class="p-10 rounded shadow-sm border-2 border-opacity-35 border-blue-700 max-w-lg w-2/3">
             <div class="mb-6 p-10 bg-white -m-10">
@@ -22,7 +23,7 @@
                                 <option value="{{ $author->id }}">{{ $author->name }}</option>
                             @endforeach
                         </select>
-                        <a href="#" class="text-sm p-1 text-muted flex self-end underline">Registrar um autor</a>
+                        <a href="{{route('author.create')}}" class="text-sm p-1 text-muted flex self-end underline">Registrar um autor</a>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-6">

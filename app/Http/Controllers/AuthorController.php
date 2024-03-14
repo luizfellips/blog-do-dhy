@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 
-class NoticiaController extends Controller
+class AuthorController extends Controller
 {
     public function create() {
-        return view('author.create');
+        $authors = Author::all();
+
+        return view('author.create', compact('authors'));
     }
 
     public function store(Request $request) {

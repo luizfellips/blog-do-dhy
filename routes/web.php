@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function () {
+    Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticia.create');
+    Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
+    Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
+    Route::get('/authors', [AuthorController::class, 'create'])->name('author.store');
+    Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');
+    Route::post('/tags', [TagsController::class, 'store'])->name('tags.store');
+    Route::delete('/tags/{tag}', [TagsController::class, 'destroy'])->name('tags.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 Route::get('/', [NoticiaController::class, 'index'])->name('home');
 Route::get('/noticias/{titulo}', [NoticiaController::class, 'showBySlug'])->name('noticia.show');
 
@@ -22,14 +38,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
-    Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticia.create');
-    Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';
