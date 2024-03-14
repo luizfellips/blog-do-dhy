@@ -18,6 +18,20 @@ class AuthorController extends Controller
     }
 
     public function store(Request $request) {
+        $author = new Author;
+        $author->name = $request->name;
+        $author->job = $request->job;
+
+        $author->save();
+
+        $authors = Author::all();
+        return view('authors.create', compact('authors'))->with('message', 'Autor registrado com sucesso');
+    }
+
+    public function destroy(Author $author) {
+        $author->delete();
+        $authors = Author::all();
         
+        return view('authors.create', compact('authors'))->with('message', 'Autor deletado com sucesso');
     }
 }

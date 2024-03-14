@@ -19,9 +19,12 @@ use App\Http\Controllers\TagsController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticia.create');
-    Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
     Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
+
+    Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
     Route::get('/authors', [AuthorController::class, 'create'])->name('author.store');
+    Route::delete('/authors/{author}', [AuthorController::class, 'destroy'])->name('author.destroy');
+
     Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');
     Route::post('/tags', [TagsController::class, 'store'])->name('tags.store');
     Route::delete('/tags/{tag}', [TagsController::class, 'destroy'])->name('tags.destroy');

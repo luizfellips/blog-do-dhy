@@ -20,6 +20,7 @@ class TagsController extends Controller
 
         $tag->save();
 
+        $tags = Tag::all();
         return view('tags.create', compact('tags'))->with('message', 'Tag criada com sucesso');
     }
 
