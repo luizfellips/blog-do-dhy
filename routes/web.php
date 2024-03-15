@@ -19,7 +19,9 @@ use App\Http\Controllers\TagsController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticia.create');
+    Route::get('/noticias/list', [NoticiaController::class, 'list'])->name('noticia.list');
     Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
+    Route::get('/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('noticia.edit');
 
     Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
     Route::post('/authors', [AuthorController::class, 'store'])->name('author.store');

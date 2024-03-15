@@ -13,10 +13,10 @@
     </div>
     <div class="my-4 d-flex">
         @foreach ($author->noticias as $noticia)
-        <div class="me-5 bg-primary-color text-white rounded-3 p-4">
+        <a href="{{route('noticia.show', ['titulo' => $noticia->slug])}}" class="me-5 bg-primary-color text-white rounded-3 p-4 transform hover:scale-105 transition duration-100">
             <p class="fs-3">{{ $noticia->titulo }}</p>
             <p>{{ $noticia->subtitulo }}</p>
-        </div>
+        </a>
         @endforeach
     </div>
 

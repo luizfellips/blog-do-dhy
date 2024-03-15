@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbar-items">
             <ul class="navbar-nav justify-content-end mb-3 mb-lg-0">
                 <li class="nav-item fs-5">
-                    <a href="{{route('home')}}" class="nav-link active" aria-current="page">Início</a>
+                    <a href="{{route('home')}}" class="nav-link {{ Request::route()->getName() === 'home' ? 'active' : '' }}" aria-current="page">Início</a>
                 </li>
                 <li class="nav-item fs-5">
                     <a href="agenda.html" class="nav-link">Agenda</a>
@@ -22,6 +22,11 @@
                 <li class="nav-item fs-5">
                     <a href="videos.html" class="nav-link">Vídeos</a>
                 </li>
+                @auth
+                <li class="nav-item fs-5">
+                    <a href="{{route('dashboard')}}" class="nav-link {{ Request::route()->getName() === 'dashboard' ? 'active' : '' }}">Dashboard</a>
+                </li>
+                @endauth
                 <li class="nav-item dropdown search-button">
                     <button class="btn rounded-6" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-search fs-5"></i>

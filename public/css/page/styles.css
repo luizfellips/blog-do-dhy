@@ -183,7 +183,10 @@ body {
     }
 }
 
-
+#corpo {
+    width: 100%; /* Set width to 100% */
+    min-height: 200px; /* Set a minimum height */
+}
 
 #navbar-items .navbar-nav {
     display: flex;

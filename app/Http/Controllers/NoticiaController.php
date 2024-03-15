@@ -38,6 +38,22 @@ class NoticiaController extends Controller
         return view('noticia.create', compact('authors', 'tags'));
     }
 
+    public function edit($id) {
+        $authors = Author::all();
+        $tags = Tag::all();
+
+        $noticia = Noticia::with(['author', 'tags'])->where('id', $id)->first();
+
+        return view('noticia.edit', compact('noticia', 'authors', 'tags'));
+    }
+
+
+    public function list() {
+        $noticias = Noticia::with('author')->paginate(6);
+
+        return view('noticia.list', compact('noticias'));
+    }
+
     public function store(Request $request) {
         $noticia = new Noticia;
 
