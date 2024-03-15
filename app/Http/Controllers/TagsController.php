@@ -21,13 +21,17 @@ class TagsController extends Controller
         $tag->save();
 
         $tags = Tag::all();
-        return view('tags.create', compact('tags'))->with('message', 'Tag criada com sucesso');
+
+        session()->flash('message', 'Tag registrada com sucesso');
+        return view('tags.create', compact('tags'));
     }
 
     public function destroy(Tag $tag) {
         $tag->delete();
         $tags = Tag::all();
 
-        return view('tags.create', compact('tags'))->with('message', 'Tag deletada com sucesso');
+        session()->flash('message', 'Tag deletada com sucesso');
+
+        return redirect()->route('tags.create', compact('tags'));
     }
 }

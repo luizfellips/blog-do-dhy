@@ -25,13 +25,24 @@ class AuthorController extends Controller
         $author->save();
 
         $authors = Author::all();
-        return view('authors.create', compact('authors'))->with('message', 'Autor registrado com sucesso');
+
+        session()->flash('message', 'Autor registrado com sucesso');
+        return view('author.create', compact('authors'));
+    }
+
+    public function show(Author $author) {
+        $authorWithNoticias = Author::with('noticias')->where('id', $author->id)->first();
+
+        return view('author.show', [
+            'author' => $authorWithNoticias,
+        ]);
     }
 
     public function destroy(Author $author) {
         $author->delete();
         $authors = Author::all();
-        
-        return view('authors.create', compact('authors'))->with('message', 'Autor deletado com sucesso');
+
+        session()->flash('message', 'Autor deletado com sucesso');
+        return view('author.create', compact('authors'));
     }
 }

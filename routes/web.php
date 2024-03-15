@@ -22,7 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
 
     Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
-    Route::get('/authors', [AuthorController::class, 'create'])->name('author.store');
+    Route::post('/authors', [AuthorController::class, 'store'])->name('author.store');
+    Route::get('/authors/{author}', [AuthorController::class, 'show'])->name('author.show');
     Route::delete('/authors/{author}', [AuthorController::class, 'destroy'])->name('author.destroy');
 
     Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');

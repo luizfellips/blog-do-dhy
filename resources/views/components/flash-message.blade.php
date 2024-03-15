@@ -1,14 +1,29 @@
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/component/flashMessage.css') }}">
+@endpush
+@if (session()->has('message'))
+    <div class="FlashMessage" id="flash-message">
+        <p id="message">
+            {{ session('message') }}
+        </p>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var flashMessage = document.getElementById('flash-message');
+            var messageElement = document.getElementById('message');
 
-@if(session()->has('message'))
-    @push('styles')
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endpush
+            // Show the flash message
+            flashMessage.style.display = 'flex';
+            messageElement.innerText = '{{ session('message') }}';
 
- <div x-data='{show: true}' x-init="setTimeout(() => show = false, 3000)"
-     x-show='show' class=" z-10 fixed whitespace-nowrap top-20 shadow-md rounded-xl left-1/2 transform -translate-x-1/2 bg-sky-400 text-white px-48 py-3">
-    <p>
-        {{session('message')}}
-    </p>
- </div>
+            // Hide the flash message after 3 seconds
+            setTimeout(function() {
+                flashMessage.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+    @php
+        session()->forget('message');
+    @endphp
 @endif

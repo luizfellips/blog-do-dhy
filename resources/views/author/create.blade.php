@@ -26,12 +26,11 @@
                                     <td>{{ $author->name }}</td>
                                     <td>{{ $author->job }}</td>
                                     <td>
-                                        <form action="{{ route('author.destroy', ['author' => $author->id]) }}"
-                                            method="post">
+                                        <form action="{{ route('author.show', ['author' => $author->id]) }}"
+                                            method="get">
                                             @csrf
-                                            @method('DELETE')
                                             <button type="submit"
-                                                class="rounded-3 bg-red-600 text-white p-1 d-flex self-end">Delete</button>
+                                                class="rounded-3 bg-blue-600 text-white p-1 d-flex self-end">Listar notícias</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -42,7 +41,6 @@
             </div>
             <form action="{{ route('author.store') }}" method="POST">
                 @csrf
-
                 <div class="grid grid-cols-1 gap-6">
                     <div class="flex flex-col">
                         <label>Nome do autor
