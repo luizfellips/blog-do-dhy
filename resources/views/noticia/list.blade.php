@@ -13,6 +13,7 @@
                         <th scope="col">Título</th>
                         <th scope="col">Subtítulo</th>
                         <th scope="col">Autor</th>
+                        <th></th>
                     @else
                         <th> </th>
                     @endunless
@@ -22,11 +23,18 @@
             <tbody>
                 @unless (count($noticias) === 0)
                     @foreach ($noticias as $noticia)
-                        <tr class=" cursor-pointer" onclick="window.location='{{ route('noticia.edit', ['id' => $noticia->id]) }}';">
+                        <tr class=" cursor-pointer"
+                            onclick="window.location='{{ route('noticia.edit', ['noticia' => $noticia->id]) }}';">
                             <th scope="row">{{ $noticia->id }}</th>
                             <td>{{ $noticia->titulo }}</td>
                             <td>{{ $noticia->subtitulo }}</td>
                             <td>{{ $noticia->author->name }}</td>
+                            <td>
+                                <form action="{{ route('noticia.confirmDelete', ['noticia' => $noticia->id]) }}" method="GET">
+                                    <button type="submit"
+                                        class="rounded-3 bg-red-600 text-white p-1 d-flex self-end">Deletar</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 @else

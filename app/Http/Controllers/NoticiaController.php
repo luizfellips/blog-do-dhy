@@ -11,13 +11,15 @@ use App\Models\Tag;
 
 class NoticiaController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $noticias = Noticia::query()->paginate(6);
 
         return view('home', compact('noticias'));
     }
 
-    public function showBySlug($titulo) {
+    public function showBySlug($titulo)
+    {
         $titulo = Str::slug($titulo);
 
         $noticia = Noticia::where('slug', $titulo)->with('author')->firstOrFail();
@@ -31,14 +33,16 @@ class NoticiaController extends Controller
         ]);
     }
 
-    public function create() {
+    public function create()
+    {
         $authors = Author::all();
         $tags = Tag::all();
 
         return view('noticia.create', compact('authors', 'tags'));
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $authors = Author::all();
         $tags = Tag::all();
 
@@ -48,13 +52,15 @@ class NoticiaController extends Controller
     }
 
 
-    public function list() {
+    public function list()
+    {
         $noticias = Noticia::with('author')->paginate(6);
 
         return view('noticia.list', compact('noticias'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $noticia = new Noticia;
 
         $noticia->titulo = $request->titulo;
@@ -69,7 +75,7 @@ class NoticiaController extends Controller
 
             $extension = $requestImage->extension();
 
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now"));
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
 
             $requestImage->move(public_path("img/noticias"), $imageName);
 
@@ -82,6 +88,63 @@ class NoticiaController extends Controller
 
         $noticia->tags()->attach($tagIds);
 
-        return redirect('/')->with('message', 'Criada com sucesso!');
+        return redirect('dashboard')->with('message', 'Criada com sucesso!');
+    }
+
+    public function update(Request $request, Noticia $noticia)
+    {
+
+        try {
+            $tagIds = $request->tags;
+
+            $noticia->update([
+                'titulo' => $request->titulo,
+                'slug' => Str::slug($request->titulo),
+                'subtitulo' => $request->subtitulo,
+                'corpo' => $request->corpo,
+                'legenda_imagem' => $request->legenda_imagem,
+                'author_id' => $request->author_id,
+            ]);
+
+            if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+                $requestImage = $request->imagem;
+
+                $extension = $requestImage->extension();
+
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+
+                $requestImage->move(public_path("img/noticias"), $imageName);
+
+                $noticia->update([
+                    'imagem' => $imageName,
+                ]);
+            }
+
+            $noticia->tags()->sync([]);
+            $noticia->tags()->attach($tagIds);
+
+            return redirect('dashboard')->with('message', 'Atualizado com sucesso!');
+        } catch (\Throwable $th) {
+            return redirect('dashboard')->with('message', 'Não foi possível completar a operação');
+        }
+    }
+
+    public function confirmDelete($id)
+    {
+        $noticia = Noticia::where('id', $id)->firstOrFail();
+
+        return view('noticia.confirmDelete', [
+            'noticia' => $noticia,
+        ]);
+    }
+
+    public function destroy(Noticia $noticia) {
+        try {
+            $noticia->delete();
+            return redirect('dashboard')->with('message', 'Deletado com sucesso!');
+
+        } catch (\Throwable $th) {
+            return redirect('dashboard')->with('message', 'Um erro ocorreu: ' . $th->getMessage());
+        }
     }
 }

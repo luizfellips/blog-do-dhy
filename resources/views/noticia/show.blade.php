@@ -29,7 +29,7 @@
 
         <div class="author border-top mt-3 px-3">
             <div class="author-details mt-4">
-                <div class="author-name text-muted">Por {{$noticia->author->name}}, {{$noticia->author->job}}</div>
+                <div class="author-name text-muted">Por {{ $noticia->author->name }}, {{ $noticia->author->job }}</div>
                 <div class="post-details text-muted">
                     <span>{{ $createdAt }}</span>
                     •
@@ -45,9 +45,17 @@
 
         <div class="container mt-2">
             @php
-                $image = file_exists(asset($noticia->imagem)) ? asset($noticia->imagem) : asset('img/placeholder.png');
+                $path = 'img/noticias/';
+                $fallback = asset('img/placeholder.png');
+                $noticiaImagem = $path . $noticia->imagem;
+
+                $image = asset($noticiaImagem);
+
+                if(is_null($noticia->imagem)) {
+                    $image = $fallback;
+                }
             @endphp
-            <div class="image">
+            <div class="show-image">
                 <img class="w-100 rounded-2" src="{{ $image }}"
                     alt="{{ $noticia->legenda_imagem ?? 'Sem legenda disponível' }}">
                 <p class="text-muted">{{ $noticia->legenda_imagem ?? 'Sem legenda disponível' }}</p>

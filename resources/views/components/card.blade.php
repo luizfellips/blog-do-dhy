@@ -5,8 +5,18 @@
 
     $updatedAt = Carbon::parse($noticia->updated_at);
     $timeAgo = $updatedAt->locale('pt_BR')->diffForHumans();
-    $image = file_exists(asset($noticia->imagem)) ? asset($noticia->imagem) : asset('img/placeholder.png');
+    $path = 'img/noticias/';
+    $fallback = asset('img/placeholder.png');
+    $noticiaImagem = $path . $noticia->imagem;
+
+    $image = asset($noticiaImagem);
+
+    if (is_null($noticia->imagem)) {
+        $image = $fallback;
+}
+
 @endphp
+
 
 <div class="col-lg-6 col-md-8 col-sm-6 col-xs {{ $extraClasses ?? '' }}">
     <a href="{{ route('noticia.show', ['titulo' => Str::slug($noticia->titulo)]) }}"

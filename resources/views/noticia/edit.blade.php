@@ -10,8 +10,9 @@
             <div class="mb-6 p-10 bg-white -m-10">
                 <h1 class="font-bold text-2xl text-gray-700 text-center">Editar notícia</h1>
             </div>
-            <form method="POST" enctype="multipart/form-data">
+            <form action="{{route('noticia.update', ['noticia' => $noticia])}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="grid grid-cols-1 gap-6">
                     <div class="flex flex-col mb-4">
                         <label>Autor

@@ -21,7 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticia.create');
     Route::get('/noticias/list', [NoticiaController::class, 'list'])->name('noticia.list');
     Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
-    Route::get('/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('noticia.edit');
+    Route::get('/noticias/{noticia}/confirmDelete', [NoticiaController::class, 'confirmDelete'])->name('noticia.confirmDelete');
+    Route::get('/noticias/{noticia}/edit', [NoticiaController::class, 'edit'])->name('noticia.edit');
+    Route::patch('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticia.update');
+    Route::delete('/noticias/{noticia}', [NoticiaController::class, 'destroy'])->name('noticia.destroy');
 
     Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
     Route::post('/authors', [AuthorController::class, 'store'])->name('author.store');
