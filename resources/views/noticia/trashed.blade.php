@@ -5,7 +5,7 @@
     @endpush
     <a href="{{ route('dashboard') }}" class="btn btn-primary">Voltar</a>
     <div class="container mt-5">
-        <h1 class="display-6 m-3">Gerenciar Notícias</h1>
+        <h1 class="display-6 m-3">Lixeira</h1>
         <table class="table table-hover text-center">
             <thead>
                 <tr>
@@ -24,23 +24,24 @@
             <tbody>
                 @unless (count($noticias) === 0)
                     @foreach ($noticias as $noticia)
-                        <tr class=" cursor-pointer"
-                            onclick="window.location='{{ route('noticia.edit', ['noticia' => $noticia->id]) }}';">
+                        <tr class=" cursor-pointer">
                             <th scope="row">{{ $noticia->id }}</th>
                             <td>{{ $noticia->titulo }}</td>
                             <td>{{ $noticia->subtitulo }}</td>
                             <td>{{ $noticia->author->name }}</td>
                             <td>
-                                <form action="{{ route('noticia.confirmDelete', ['noticia' => $noticia->id]) }}" method="GET">
+                                <form action="{{ route('noticia.restore', ['noticia' => $noticia->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
                                     <button type="submit"
-                                        class="rounded-3 bg-red-600 text-white p-1 d-flex self-end">Deletar</button>
+                                        class="rounded-3 bg-blue-600 text-white p-1 d-flex self-end">Restaurar</button>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
                 @else
                     <tr>
-                        <th> Não há notícias registradas.
+                        <th> Não há nada na lixeira.
                         </th>
                     </tr>
                 @endunless

@@ -24,6 +24,7 @@ class Noticia extends Model
         'imagem',
         'legenda_imagem',
         'author_id',
+        'is_featured'
     ];
 
     public function author()

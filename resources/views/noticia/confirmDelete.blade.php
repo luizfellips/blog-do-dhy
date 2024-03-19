@@ -29,7 +29,7 @@
                 </div>
                 <div class="mt-6 flex gap-6">
                     <button type="submit"
-                        class="rounded-full bg-blue-500 py-4 px-10 font-bold container transition text-white shadow hover:bg-blue-600">Deletar</button>
+                        class="rounded-full bg-red-500 py-4 px-10 font-bold container transition text-white shadow hover:bg-red-600">Deletar</button>
                 </div>
             </form>
         </div>

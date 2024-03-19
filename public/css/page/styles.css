@@ -288,6 +288,10 @@ body {
     object-fit: cover;
 }
 
+.btn {
+    border-radius: 10px !important;
+}
+
 .image {
     max-height: 181px;
 }

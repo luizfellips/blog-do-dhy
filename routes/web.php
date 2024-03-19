@@ -20,11 +20,18 @@ use App\Http\Controllers\TagsController;
 Route::middleware('auth')->group(function () {
     Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticia.create');
     Route::get('/noticias/list', [NoticiaController::class, 'list'])->name('noticia.list');
+    Route::get('/noticias/carousel', [NoticiaController::class, 'carousel'])->name('noticia.carousel');
+    Route::get('/noticias/trashed', [NoticiaController::class, 'trashed'])->name('noticia.trashed');
+    
     Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
     Route::get('/noticias/{noticia}/confirmDelete', [NoticiaController::class, 'confirmDelete'])->name('noticia.confirmDelete');
     Route::get('/noticias/{noticia}/edit', [NoticiaController::class, 'edit'])->name('noticia.edit');
     Route::patch('/noticias/{noticia}', [NoticiaController::class, 'update'])->name('noticia.update');
     Route::delete('/noticias/{noticia}', [NoticiaController::class, 'destroy'])->name('noticia.destroy');
+    Route::patch('/noticias/carousel/{noticia}', [NoticiaController::class, 'addToCarousel'])->name('noticia.addToCarousel');
+    Route::delete('/noticias/carousel/{noticia}', [NoticiaController::class, 'removeFromCarousel'])->name('noticia.removeFromCarousel');
+    Route::put('/noticias/restore/{noticia}', [NoticiaController::class, 'restore'])->name('noticia.restore');
+
 
     Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
     Route::post('/authors', [AuthorController::class, 'store'])->name('author.store');
