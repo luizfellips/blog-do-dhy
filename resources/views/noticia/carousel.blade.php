@@ -24,25 +24,23 @@
             <thead>
                 <tr>
                     @unless (count($noticias) === 0)
-                        <th scope="col">ID</th>
-                        <th scope="col">Título</th>
-                        <th scope="col">Subtítulo</th>
-                        <th></th>
+                        <th>Título</th>
+                        <th>Ações</th>
                     @else
                         <th> </th>
                     @endunless
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 @unless (count($noticias) === 0)
                     @foreach ($noticias as $noticia)
                         <tr class=" cursor-pointer">
-                            <th scope="row">{{ $noticia->id }}</th>
-                            <td>{{ $noticia->titulo }}</td>
-                            <td>{{ $noticia->subtitulo }}</td>
+                            <td>
+                                <p>{{ $noticia->titulo }}</p>
+                            </td>
                             @if (!$noticia->is_featured)
-                                <td>
+                                <td class="flex justify-center">
                                     <form action="{{ route('noticia.addToCarousel', ['noticia' => $noticia]) }}"
                                         method="POST">
                                         @csrf
@@ -53,7 +51,7 @@
                                 </td>
                             @endif
                             @if ($noticia->is_featured)
-                                <td>
+                                <td class="flex justify-center">
                                     <form action="{{route('noticia.removeFromCarousel', ['noticia' => $noticia])}}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -66,7 +64,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <th> No flights were found.
+                        <th> Não há notícias no carrossel.
                         </th>
                     </tr>
                 @endunless
