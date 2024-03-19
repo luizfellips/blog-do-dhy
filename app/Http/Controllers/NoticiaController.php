@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Author;
 use App\Models\Noticia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class NoticiaController extends Controller
 {
     public function index()
     {
+        $carouselNoticias = Noticia::where('is_featured', true)->get();
         $noticias = Noticia::query()->paginate(6);
 
-        return view('home', compact('noticias'));
+        return view('home', compact('noticias', 'carouselNoticias'));
     }
 
     public function showBySlug($titulo)
@@ -77,7 +81,13 @@ class NoticiaController extends Controller
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
 
-            $requestImage->move(public_path("img/noticias"), $imageName);
+            $manager = new ImageManager(
+                new Driver()
+            );
+            // Resize the image
+            $image = $manager->read($requestImage);
+            $image->scale(1320, 583);
+            $image->toPng()->save(public_path("img/noticias/") . $imageName);
 
             $noticia->imagem = $imageName;
         }
@@ -93,7 +103,6 @@ class NoticiaController extends Controller
 
     public function update(Request $request, Noticia $noticia)
     {
-
         try {
             $tagIds = $request->tags;
 
@@ -113,7 +122,19 @@ class NoticiaController extends Controller
 
                 $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
 
-                $requestImage->move(public_path("img/noticias"), $imageName);
+                $manager = new ImageManager(
+                    new Driver()
+                );
+                // Resize the image
+                $image = $manager->read($requestImage);
+                $image->scale(1320, 583);
+                $image->toPng()->save(public_path("img/noticias/") . $imageName);
+
+                // Delete old image
+                $oldImagePath = public_path("img/noticias/") . $noticia->imagem;
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
 
                 $noticia->update([
                     'imagem' => $imageName,
@@ -125,7 +146,7 @@ class NoticiaController extends Controller
 
             return redirect('dashboard')->with('message', 'Atualizado com sucesso!');
         } catch (\Throwable $th) {
-            return redirect('dashboard')->with('message', 'Não foi possível completar a operação');
+            return redirect('dashboard')->with('message', 'Não foi possível completar a operação, erro: ' . $th->getMessage());
         }
     }
 
@@ -138,11 +159,11 @@ class NoticiaController extends Controller
         ]);
     }
 
-    public function destroy(Noticia $noticia) {
+    public function destroy(Noticia $noticia)
+    {
         try {
             $noticia->delete();
             return redirect('dashboard')->with('message', 'Deletado com sucesso!');
-
         } catch (\Throwable $th) {
             return redirect('dashboard')->with('message', 'Um erro ocorreu: ' . $th->getMessage());
         }

@@ -22,7 +22,8 @@ class Noticia extends Model
         'subtitulo',
         'corpo',
         'imagem',
-        'legenda_imagem'
+        'legenda_imagem',
+        'author_id',
     ];
 
     public function author()

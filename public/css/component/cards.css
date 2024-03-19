@@ -8,6 +8,12 @@
     }
 }
 
+.carouselImage {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+}
+
 .isShowPage {
     width: 50%;
 }
@@ -39,8 +45,10 @@
 }
 
 @media (max-width: 575px) {
-    .col-xs {
-        width: 50%;
+    .card {
+        .card-title {
+            font-size: 16px;
+        }
     }
 }
 
@@ -54,14 +62,6 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-    }
-}
-
-@media (min-width:375px) and (max-width: 390px) {
-    .col-xs {
-        .card {
-            height: 100%;
         }
     }
 }
