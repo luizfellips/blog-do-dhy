@@ -23,7 +23,16 @@
                 <div class="opcoes d-flex flex-lg-row flex-column gap-4">
                     <a href="#" class="btn btn-primary fs-4">Atualizar senha</a>
                     <a href="#" class="btn btn-primary fs-4">Ver contatos de suporte</a>
+                    <!-- Authentication -->
                 </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a class="btn btn-primary fs-4 my-5" href="{{route('logout')}}"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                        {{ __('Sair') }}
+                    </a>
+                </form>
             </div>
         </div>
     </div>
