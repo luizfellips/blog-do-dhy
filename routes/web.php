@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TagsController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [NoticiaController::class, 'index'])->name('home');
 Route::get('/noticias/results', [NoticiaController::class, 'searchResults'])->name('noticia.searchResults');
 Route::get('/noticias/{titulo}', [NoticiaController::class, 'showBySlug'])->name('noticia.show');
+Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

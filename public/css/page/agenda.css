@@ -1,0 +1,102 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    overflow: hidden;
+}
+
+.calendar {
+    text-align: center;
+
+    h1 {
+        padding: 15px;
+    }
+
+    #calendario {
+        width: 100%;
+        border-collapse: inherit;
+        border-spacing: 0 10px;
+
+        tr {
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+        }
+
+        th,
+        td {
+            padding: 25px;
+            border-radius: 55px;
+        }
+
+        .active {
+            background-color: #525CEB;
+            color: #fff; 
+            font-weight: bold;
+            margin-bottom: 15px !important;
+        }
+    }
+
+    .modal {
+        display: none;
+            position: absolute;
+            width: 12rem;
+            height: 100px;
+            overflow: hidden;
+            top: 0;
+            left: 100%;
+            transform: translate(-50%, 0);
+            background-color: #03bfe0;
+            padding: 20px;
+            color: white;
+            border-radius: 10px;
+            z-index: 1000;  
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar {
+        margin-top: 7rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        h1 {
+            padding: 15px;
+        }
+
+        #calendario {
+            align-self: center;
+            width: 100%;
+            th,
+            td {
+                padding: 15px;
+            }
+        }
+    }
+}
+
+@media (max-width: 389px) {
+    .calendar {
+        margin-top: 7rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        h1 {
+            padding: 15px;
+        }
+
+        #calendario {
+            align-self: center;
+            width: 1rem;
+            th,
+            td {
+                padding: 7px;
+            }
+        }
+    }
+}

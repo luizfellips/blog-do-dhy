@@ -22,7 +22,6 @@
 
 <x-layout>
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/page/styles.css') }}">
         @vite(['resources/css/app.css'])
     @endpush
     <a href="{{ route('dashboard') }}" class="btn btn-primary">Voltar</a>

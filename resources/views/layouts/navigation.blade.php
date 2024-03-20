@@ -14,7 +14,7 @@
                     <a href="{{route('home')}}" class="nav-link {{ Request::route()->getName() === 'home' ? 'active' : '' }}" aria-current="page">Início</a>
                 </li>
                 <li class="nav-item fs-5">
-                    <a href="agenda.html" class="nav-link">Agenda</a>
+                    <a href="{{route('agenda.index')}}" class="nav-link {{ Request::route()->getName() === 'agenda.index' ? 'active' : '' }}" class="nav-link">Agenda</a>
                 </li>
                 <li class="nav-item fs-5">
                     <a href="redes-sociais.html" class="nav-link">Redes Sociais</a>

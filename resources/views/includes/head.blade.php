@@ -13,6 +13,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/jquery.min.js'])
     <!--bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{asset('css/page/styles.css')}}">
     <link rel="stylesheet" href="{{asset('css/component/flash.css')}}">
     @stack('styles')
 </head>

@@ -20,19 +20,24 @@
             </div>
             <div class="col-lg">
                 <h1 class="display-5 my-3">Meu Perfil</h1>
-                <div class="opcoes d-flex flex-lg-row flex-column gap-4">
+                <div class="opcoes d-flex justify-content-center flex-lg-row flex-column gap-4">
                     <a href="#" class="btn btn-primary fs-4">Atualizar senha</a>
                     <a href="#" class="btn btn-primary fs-4">Ver contatos de suporte</a>
                     <!-- Authentication -->
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <a class="btn btn-primary fs-4 my-5" href="{{route('logout')}}"
+                    <a class="btn btn-primary container fs-4 my-5" href="{{route('logout')}}"
                         onclick="event.preventDefault();
                                     this.closest('form').submit();">
                         {{ __('Sair') }}
                     </a>
                 </form>
+                <h1 class="display-5 my-3">Agenda</h1>
+                <div class="opcoes d-flex flex-column gap-4">
+                    <a href="{{ route('author.create') }}" class="btn btn-primary fs-4">Agendar evento</a>
+                    <a href="{{ route('tags.create') }}" class="btn btn-primary fs-4">Desmarcar evento</a>
+                </div>
             </div>
         </div>
     </div>
