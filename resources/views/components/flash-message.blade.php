@@ -1,8 +1,10 @@
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/component/flashMessage.css') }}">
-@endpush
+
+
 @if (session()->has('message'))
-    <div class="FlashMessage" id="flash-message">
+    @php
+        $status = session('status');
+    @endphp
+    <div class="FlashMessage {{ $status === 'error' ? ' FlashMessage-Error' : '' }}" id="flash-message">
         <p id="message">
             {{ session('message') }}
         </p>

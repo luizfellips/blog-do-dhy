@@ -30,7 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/noticias/{noticia}', [NoticiaController::class, 'destroy'])->name('noticia.destroy');
     Route::patch('/noticias/carousel/{noticia}', [NoticiaController::class, 'addToCarousel'])->name('noticia.addToCarousel');
     Route::delete('/noticias/carousel/{noticia}', [NoticiaController::class, 'removeFromCarousel'])->name('noticia.removeFromCarousel');
-    Route::put('/noticias/restore/{noticia}', [NoticiaController::class, 'restore'])->name('noticia.restore');
+    Route::put('/noticias/trashed/{noticia}', [NoticiaController::class, 'restore'])->name('noticia.restore');
+    Route::delete('/noticias/trashed/{noticia}', [NoticiaController::class, 'disintegrate'])->name('noticia.disintegrate');
 
 
     Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');

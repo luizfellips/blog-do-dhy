@@ -17,7 +17,7 @@
                         <label>Autor
                             <span class="block text-xs font-light text-stone-400">Escolha um autor</span>
                         </label>
-                        <select id="author" name="author_id" class="mt-2 px-4 py-2 shadow rounded">
+                        <select id="author" name="author_id" required class="mt-2 px-4 py-2 shadow rounded">
                             <option value="">Escolha um autor</option>
                             @foreach ($authors as $author)
                                 <option value="{{ $author->id }}">{{ $author->name }}</option>
@@ -31,13 +31,13 @@
                         <label>Título
                             <span class="block text-xs font-light text-stone-400">O título da notícia</span>
                         </label>
-                        <input type="text" name="titulo" class="mt-2 px-4 py-2 shadow rounded" />
+                        <input type="text" name="titulo" required class="mt-2 px-4 py-2 shadow rounded" />
                     </div>
                     <div class="flex flex-col mb-4">
                         <label>Subtítulo
                             <span class="block text-xs font-light text-stone-400">O subtítulo da notícia</span>
                         </label>
-                        <input type="text" name="subtitulo" class="mt-2 px-4 py-2 shadow rounded" />
+                        <input type="text" name="subtitulo" required class="mt-2 px-4 py-2 shadow rounded" />
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                     <label>Corpo
                         <span class="block text-xs font-light text-stone-400">Corpo da notícia</span>
                     </label>
-                    <textarea name="corpo" cols="16" class="mt-2 px-4 py-2 shadow rounded"></textarea>
+                    <textarea required name="corpo" cols="16" class="mt-2 px-4 py-2 shadow rounded"></textarea>
                     <div class="info">
                         <p class="text-sm p-1 mt-2 text-muted">Você pode usar as seguintes marcações para personalizar o
                             texto:</p>
@@ -98,7 +98,6 @@
                     </div>
                 @endforeach
                 </div>
-
                 <div class="mt-6 flex gap-6">
                     <button type="submit"
                         class="rounded-full bg-blue-500 py-4 px-10 font-bold container transition text-white shadow hover:bg-blue-600">Criar</button>

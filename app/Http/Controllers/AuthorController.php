@@ -11,13 +11,15 @@ use App\Models\Tag;
 
 class AuthorController extends Controller
 {
-    public function create() {
+    public function create()
+    {
         $authors = Author::all();
 
         return view('author.create', compact('authors'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $author = new Author;
         $author->name = $request->name;
         $author->job = $request->job;
@@ -30,7 +32,8 @@ class AuthorController extends Controller
         return view('author.create', compact('authors'));
     }
 
-    public function show(Author $author) {
+    public function show(Author $author)
+    {
         $authorWithNoticias = Author::with('noticias')->where('id', $author->id)->first();
 
         return view('author.show', [
@@ -38,11 +41,20 @@ class AuthorController extends Controller
         ]);
     }
 
-    public function destroy(Author $author) {
-        $author->delete();
-        $authors = Author::all();
+    public function destroy(Author $author)
+    {
+        try {
+            $author->delete();
+            $authors = Author::all();
 
-        session()->flash('message', 'Autor deletado com sucesso');
-        return view('author.create', compact('authors'));
+            session()->flash('message', 'Autor deletado com sucesso');
+            return view('author.create', compact('authors'));
+        } catch (\Throwable $th) {
+            $authors = Author::all();
+
+            session()->flash('message', 'Não foi possível deletar o autor. Há notícias associadas com o mesmo, exclua-as permantemente e tente novamente.');
+            session()->flash('status', 'error');
+            return view('author.create', compact('authors'));
+        }
     }
 }

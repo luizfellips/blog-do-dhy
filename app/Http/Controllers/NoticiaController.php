@@ -83,6 +83,19 @@ class NoticiaController extends Controller
         }
     }
 
+    public function disintegrate($id) {
+
+        try {
+        $softDeletedNoticia = Noticia::onlyTrashed()->find($id);
+
+            if ($softDeletedNoticia) {
+                $softDeletedNoticia->forceDelete();
+            }            return redirect('dashboard')->with('message', 'Desintegrado com sucesso!');
+        } catch (\Throwable $th) {
+            return redirect('dashboard')->with('message', 'Um erro ocorreu: ' . $th->getMessage());
+        }
+    }
+
     public function carousel()
     {
         $noticias = Noticia::query()->paginate(6);

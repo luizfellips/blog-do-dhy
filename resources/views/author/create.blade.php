@@ -18,6 +18,7 @@
                                 <th>Nome</th>
                                 <th>Profissão</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +32,15 @@
                                             @csrf
                                             <button type="submit"
                                                 class="rounded-3 bg-blue-600 text-white p-1 d-flex self-end">Listar notícias</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('author.destroy', ['author' => $author->id]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="rounded-3 bg-red-600 text-white p-1 d-flex self-end">Deletar autor</button>
                                         </form>
                                     </td>
                                 </tr>

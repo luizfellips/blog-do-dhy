@@ -4,7 +4,8 @@
 <head>
     @include('includes.head')
 </head>
-
+@push('styles')
+@endpush
 <body style="padding-block-start: 120px;">
     <x-flash-message />
     <wrapper style="height: 100vh">
