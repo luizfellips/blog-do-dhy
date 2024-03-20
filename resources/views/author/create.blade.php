@@ -12,11 +12,11 @@
             <div class="grid grid-cols-1 gap-6">
                 <div class="flex flex-col">
                     <p class="text-lg p-2">Autores registrados</p>
-                    <table class="table">
+                    <table class="table self-center">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Profissão</th>
+                                <th>Autor</th>
+                                <th class="d-none d-sm-table-cell">Profissão</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -25,7 +25,7 @@
                             @foreach ($authors as $author)
                                 <tr>
                                     <td>{{ $author->name }}</td>
-                                    <td>{{ $author->job }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $author->job }}</td>
                                     <td>
                                         <form action="{{ route('author.show', ['author' => $author->id]) }}"
                                             method="get">

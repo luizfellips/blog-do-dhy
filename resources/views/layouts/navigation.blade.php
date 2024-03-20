@@ -31,9 +31,9 @@
                     <button class="btn rounded-6" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-search fs-5"></i>
                     </button>
-                    <form class="dropdown-menu px-2 py-0">
+                    <form action="{{route('noticia.searchResults')}}" class="dropdown-menu px-2 py-0" method="GET">
                         <div class="row">
-                            <input type="text" class="form-control col m-2" id="search" placeholder="Busca">
+                            <input type="text" name="search" class="form-control col m-2" id="search" placeholder="Busca">
                             <button type="submit" class="btn btn-primary rounded-pill m-2 col">Pesquisar</button>
                         </div>
                     </form>

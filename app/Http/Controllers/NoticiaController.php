@@ -22,6 +22,13 @@ class NoticiaController extends Controller
         return view('home', compact('noticias', 'carouselNoticias'));
     }
 
+    public function searchResults()
+    {
+        $noticias = Noticia::query()->filter(request(['tag', 'search']))->paginate(6);
+
+        return view('noticia.searchResults', compact('noticias'));
+    }
+
     public function showBySlug($titulo)
     {
         $titulo = Str::slug($titulo);

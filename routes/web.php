@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [NoticiaController::class, 'index'])->name('home');
+Route::get('/noticias/results', [NoticiaController::class, 'searchResults'])->name('noticia.searchResults');
 Route::get('/noticias/{titulo}', [NoticiaController::class, 'showBySlug'])->name('noticia.show');
 
 Route::get('/dashboard', function () {

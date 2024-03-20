@@ -27,6 +27,17 @@ class Noticia extends Model
         'is_featured'
     ];
 
+    public function scopeFilter($query, array $filters){
+        return $query->when($filters['tag'] ?? false, function ($query, $tag) {
+            $query->whereHas('tags', function ($query) use ($tag) {
+                $query->where('name', 'like', '%' . $tag . '%');
+            });
+            
+        })->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where('titulo', 'like', '%' . $search . '%');
+        });
+    }
+
     public function author()
     {
         return $this->belongsTo(Author::class);
