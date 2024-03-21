@@ -16,6 +16,10 @@ body {
         padding: 15px;
     }
 
+    .isDelete {
+        background: #f53e3e;
+    }
+
     #calendario {
         width: 100%;
         border-collapse: inherit;

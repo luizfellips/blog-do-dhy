@@ -59,7 +59,7 @@ class AgendaController extends Controller
         try {
             $agenda = Agenda::find($id);
             $agenda->delete();
-            return redirect()->route('agenda.index')->with('message', 'Desmarcado com sucesso!');
+            return redirect()->route('agenda.delete')->with('message', 'Desmarcado com sucesso!');
         } catch (\Throwable $th) {
             session()->flash('message', 'Um erro ocorreu: ' . $th->getMessage());
             session()->flash('status', 'error');
