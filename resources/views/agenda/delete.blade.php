@@ -35,10 +35,12 @@
 
                     if (agendaForDay) {
                         cell.classList.add('active');
+                        cell.classList.add('isDelete');
                         cell.setAttribute('data-toggle', 'modal');
                         cell.setAttribute('data-target', '#agendaModal');
 
                         // Set the agenda data as attributes on the cell
+                        cell.setAttribute('data-id', agendaForDay.id);
                         cell.setAttribute('data-title', agendaForDay.titulo);
                         cell.setAttribute('data-date', agendaForDay.data);
                         cell.setAttribute('data-description', agendaForDay.descricao);
@@ -54,6 +56,7 @@
 
     function openModal(id) {
         var cell = event.target;
+        var dataId = cell.getAttribute('data-id');
         var title = cell.getAttribute('data-title');
         var date = cell.getAttribute('data-date');
         var description = cell.getAttribute('data-description');
@@ -63,6 +66,12 @@
         var year = agendaDate.getFullYear();
         var hours = agendaDate.getHours();
         var minutes = agendaDate.getMinutes();
+
+        var form = document.getElementById("form");
+        form.setAttribute("id", 'deleteForm-' + dataId);
+        var actionUrl = '{{ route('agenda.destroy', ['id' => ':id']) }}';
+        actionUrl = actionUrl.replace(':id', dataId);
+        form.setAttribute('action', actionUrl);
 
 
         // Format  day, month, year, hours and minutes to have leading zeros if necessary
@@ -85,10 +94,11 @@
         modalTime.textContent = time;
         modalDescription.textContent = description;
         $('#agendaModal').modal('show');
-    }
 
-    function hideModal() {
-        $('#agendaModal').modal('hide');
+        $('#confirmDeleteBtn').on('click', function() {
+            $('#deleteForm-' + dataId).submit();
+
+        });
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -107,6 +117,10 @@
         activeCells.forEach(function(cell) {
             cell.addEventListener("click", openModal);
         });
+
+        $('#agendaModal').on('hidden.bs.modal', function(e) {
+            $('.deleteForm').attr('id','form');
+        });
     });
 </script>
 
@@ -120,7 +134,7 @@
     <div class="container">
         <div class="calendar">
             <h1 class="display-6 text-black text-start">
-                Agenda
+                Clique em um evento para desmarcá-lo.
             </h1>
             <div class="calendar-title bg-primary-color rounded-4 p-3">
                 <h1 class="display-6 text-white">
@@ -164,8 +178,15 @@
                 <div class="modal-body">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="hideModal()" class="btn btn-primary"
-                        data-dismiss="modal">Fechar</button>
+                    <div class="d-flex flex-row">
+                        <p class="mx-2 fs-5">Você realmente deseja desmarcar este evento?</p>
+                        <form class="deleteForm" id="form" action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button id="confirmDeleteBtn" type="button" class="btn btn-danger"
+                                data-dismiss="modal">Desmarcar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

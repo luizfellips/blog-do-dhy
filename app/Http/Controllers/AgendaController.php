@@ -22,7 +22,7 @@ class AgendaController extends Controller
      */
     public function create()
     {
-        //
+        return view('agenda.create');
     }
 
     /**
@@ -30,38 +30,40 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $agenda = new Agenda;
+            $agenda->titulo = $request->titulo;
+            $agenda->descricao = $request->descricao;
+            $agenda->data = $request->data;
+
+            $agenda->save();
+            return redirect()->route('agenda.index')->with('message', 'Agendado com sucesso!');
+        } catch (\Throwable $th) {
+            session()->flash('message', 'Um erro ocorreu: ' . $th->getMessage());
+            session()->flash('status', 'error');
+            return redirect()->route('dashboard');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Agenda $agenda)
+    public function delete()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Agenda $agenda)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Agenda $agenda)
-    {
-        //
+        $agenda = Agenda::all();
+        return view('agenda.delete', compact('agenda'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Agenda $agenda)
+    public function destroy($id)
     {
-        //
+        try {
+            $agenda = Agenda::find($id);
+            $agenda->delete();
+            return redirect()->route('agenda.index')->with('message', 'Desmarcado com sucesso!');
+        } catch (\Throwable $th) {
+            session()->flash('message', 'Um erro ocorreu: ' . $th->getMessage());
+            session()->flash('status', 'error');
+            return redirect()->route('dashboard');
+        }
     }
 }

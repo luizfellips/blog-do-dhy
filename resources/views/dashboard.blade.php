@@ -35,8 +35,8 @@
                 </form>
                 <h1 class="display-5 my-3">Agenda</h1>
                 <div class="opcoes d-flex flex-column gap-4">
-                    <a href="{{ route('author.create') }}" class="btn btn-primary fs-4">Agendar evento</a>
-                    <a href="{{ route('tags.create') }}" class="btn btn-primary fs-4">Desmarcar evento</a>
+                    <a href="{{ route('agenda.create') }}" class="btn btn-primary fs-4">Agendar evento</a>
+                    <a href="{{ route('agenda.delete') }}" class="btn btn-primary fs-4">Desmarcar evento</a>
                 </div>
             </div>
         </div>

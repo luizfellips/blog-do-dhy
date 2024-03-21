@@ -9,14 +9,20 @@
         <div class="carrossel-atual m-5">
             <div class="row g-5">
                 <div class="fs-4 text-center">Carrossel atual</div>
-                @foreach ($carouselNoticias as $carouselNoticia)
-                    <div class="col d-block">
-                        <div class="bg-slate-200 p-4 rounded-3">
-                            <h5 class="fs-5">{{ $carouselNoticia->titulo }}</h5>
-                            <p class="text-muted">{{ $carouselNoticia->subtitulo }}</p>
+                @unless (count($carouselNoticias) === 0)
+                    @foreach ($carouselNoticias as $carouselNoticia)
+                        <div class="col d-block">
+                            <div class="bg-slate-200 p-4 rounded-3">
+                                <h5 class="fs-5">{{ $carouselNoticia->titulo }}</h5>
+                                <p class="text-muted">{{ $carouselNoticia->subtitulo }}</p>
+                            </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="col">   
+                        <p>Não há notícias no carrossel.</p>
                     </div>
-                @endforeach
+                @endunless
             </div>
 
         </div>
@@ -52,7 +58,8 @@
                             @endif
                             @if ($noticia->is_featured)
                                 <td class="flex justify-center">
-                                    <form action="{{route('noticia.removeFromCarousel', ['noticia' => $noticia])}}" method="POST">
+                                    <form action="{{ route('noticia.removeFromCarousel', ['noticia' => $noticia]) }}"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

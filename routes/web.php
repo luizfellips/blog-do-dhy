@@ -44,6 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/tags', [TagsController::class, 'store'])->name('tags.store');
     Route::delete('/tags/{tag}', [TagsController::class, 'destroy'])->name('tags.destroy');
 
+    Route::get('/agenda/create', [AgendaController::class, 'create'])->name('agenda.create');
+    Route::post('/agenda', [AgendaController::class, 'store'])->name('agenda.store');
+    Route::get('/agenda/delete', [AgendaController::class, 'delete'])->name('agenda.delete');
+    Route::delete('/agenda/{id}', [AgendaController::class, 'destroy'])->name('agenda.destroy');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
