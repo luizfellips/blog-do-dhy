@@ -11,10 +11,10 @@
         <div class="collapse navbar-collapse" id="navbar-items">
             <ul class="navbar-nav justify-content-end mb-3 mb-lg-0">
                 <li class="nav-item fs-5">
-                    <a href="{{route('home')}}" class="nav-link {{ Request::route()->getName() === 'home' ? 'active' : '' }}" aria-current="page">Início</a>
+                    <a href="{{route('home')}}" class="nav-link {{ Request::route() && Request::route()->getName() === 'home' ? 'active' : '' }}" aria-current="page">Início</a>
                 </li>
                 <li class="nav-item fs-5">
-                    <a href="{{route('agenda.index')}}" class="nav-link {{ Request::route()->getName() === 'agenda.index' ? 'active' : '' }}" class="nav-link">Agenda</a>
+                    <a href="{{route('agenda.index')}}" class="nav-link {{ Request::route() && Request::route()->getName() === 'agenda.index' ? 'active' : '' }}" class="nav-link">Agenda</a>
                 </li>
                 <li class="nav-item fs-5">
                     <a href="redes-sociais.html" class="nav-link">Redes Sociais</a>
@@ -24,7 +24,7 @@
                 </li>
                 @auth
                 <li class="nav-item fs-5">
-                    <a href="{{route('dashboard')}}" class="nav-link {{ Request::route()->getName() === 'dashboard' ? 'active' : '' }}">Dashboard</a>
+                    <a href="{{route('dashboard')}}" class="nav-link {{ Request::route() && Request::route()->getName() === 'dashboard' ? 'active' : '' }}">Dashboard</a>
                 </li>
                 @endauth
                 <li class="nav-item dropdown search-button">

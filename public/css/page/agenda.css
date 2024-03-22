@@ -6,7 +6,8 @@ body {
 }
 
 body {
-    overflow: hidden;
+    padding-block-start: 95px;
+    overflow-x: hidden;
 }
 
 .calendar {

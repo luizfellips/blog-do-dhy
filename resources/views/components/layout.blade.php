@@ -3,18 +3,31 @@
 
 <head>
     @include('includes.head')
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1 0 auto;
+        }
+    </style>
 </head>
 @push('styles')
 @endpush
-<body style="padding-block-start: 120px;">
-    <x-flash-message />
-    <wrapper style="height: 100vh">
-        @include('layouts.navigation')
 
-        <div id="main" class="container">
-            {{ $slot }}
-        </div>
-    </wrapper>
+<body>
+    <div id="main" class="content container">
+        @include('layouts.navigation')
+        <x-flash-message />
+        {{ $slot }}
+    </div>
     <footer class="container-fluid position-relative bottom-0" id="footer">
         @include('layouts.footer')
     </footer>
