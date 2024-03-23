@@ -46,7 +46,7 @@
                                 <p>{{ $noticia->titulo }}</p>
                             </td>
                             @if (!$noticia->is_featured)
-                                <td class="flex justify-center">
+                                <td class="">
                                     <form action="{{ route('noticia.addToCarousel', ['noticia' => $noticia]) }}"
                                         method="POST">
                                         @csrf
@@ -57,7 +57,7 @@
                                 </td>
                             @endif
                             @if ($noticia->is_featured)
-                                <td class="flex justify-center">
+                                <td class="">
                                     <form action="{{ route('noticia.removeFromCarousel', ['noticia' => $noticia]) }}"
                                         method="POST">
                                         @csrf

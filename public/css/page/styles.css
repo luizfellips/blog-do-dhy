@@ -12,8 +12,13 @@ body {
     overflow-x: hidden;
 }
 
+.collapse {
+    visibility: visible !important;
+}
+
 body {
-    overflow: hidden;
+    padding-block-start: 90px;
+    overflow-x: hidden;
 }
 
 .bg-primary-color {

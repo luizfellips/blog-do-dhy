@@ -26,21 +26,21 @@
                                 <tr>
                                     <td>{{ $author->name }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $author->job }}</td>
-                                    <td>
+                                    <td class="p-0 pt-3 px-1">
                                         <form action="{{ route('author.show', ['author' => $author->id]) }}"
                                             method="get">
                                             @csrf
                                             <button type="submit"
-                                                class="rounded-3 bg-blue-600 text-white p-1 d-flex self-end">Listar notícias</button>
+                                                class="rounded-3 bg-blue-600 text-white p-1 d-flex self-end">Notícias</button>
                                         </form>
                                     </td>
-                                    <td>
+                                    <td class="p-0 pt-3">
                                         <form action="{{ route('author.destroy', ['author' => $author->id]) }}"
                                             method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="rounded-3 bg-red-600 text-white p-1 d-flex self-end">Deletar autor</button>
+                                                class="rounded-3 bg-red-600 text-white p-1 d-flex self-end">Deletar</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -28,7 +28,7 @@
                                 <p>{{ $noticia->titulo }}</p>
                             </td>
                             <td>{{ $noticia->author->name }}</td>
-                            <td class="flex justify-center">
+                            <td>
                                 <form action="{{ route('noticia.confirmDelete', ['noticia' => $noticia->id]) }}"
                                     method="GET">
                                     <button type="submit"
