@@ -131,9 +131,9 @@ class NoticiaController extends Controller
                 'is_featured' => false,
             ]);
 
-            return redirect('dashboard')->with('message', 'Removido do carrossel com sucesso!');
+            return redirect()->route('noticia.carousel')->with('message', 'Removido do carrossel com sucesso!');
         } catch (\Throwable $th) {
-            return redirect('dashboard')->with('message', 'Não foi possível completar a operação, erro: ' . $th->getMessage());
+            return redirect()->route('noticia.carousel')->with('message', 'Não foi possível completar a operação, erro: ' . $th->getMessage());
         }
     }
 

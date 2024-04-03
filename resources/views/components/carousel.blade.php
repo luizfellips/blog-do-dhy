@@ -23,8 +23,10 @@
                         $image = $fallback;
                     }
                 @endphp
-                <div class="carousel-item @if ($loop->first) active @endif">
-                    <img src="{{ $image }}" class="carouselImage" alt="...">
+                <div class="carousel-item  @if ($loop->first) active @endif">
+                    <a href="{{ route('noticia.show', ['titulo' => $carouselNoticia->slug]) }}">
+                        <img src="{{ $image }}" class="carouselImage" alt="...">
+                    </a>
                     <div class="carousel-caption mobile-caption shadow-none d-md-block">
                         <h5>{{ $carouselNoticia->titulo }}</h5>
                         <p class="d-none d-md-block">{{ $carouselNoticia->subtitulo }}</p>

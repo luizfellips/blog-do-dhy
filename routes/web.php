@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\NoticiaController;
@@ -23,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/noticias/list', [NoticiaController::class, 'list'])->name('noticia.list');
     Route::get('/noticias/carousel', [NoticiaController::class, 'carousel'])->name('noticia.carousel');
     Route::get('/noticias/trashed', [NoticiaController::class, 'trashed'])->name('noticia.trashed');
-    
+
     Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticia.store');
     Route::get('/noticias/{noticia}/confirmDelete', [NoticiaController::class, 'confirmDelete'])->name('noticia.confirmDelete');
     Route::get('/noticias/{noticia}/edit', [NoticiaController::class, 'edit'])->name('noticia.edit');
@@ -60,11 +61,11 @@ Route::get('/noticias/results', [NoticiaController::class, 'searchResults'])->na
 Route::get('/noticias/{titulo}', [NoticiaController::class, 'showBySlug'])->name('noticia.show');
 Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
 
-
+Route::get('/videos', [VideoController::class, 'index'])->name('videos');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

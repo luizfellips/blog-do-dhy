@@ -29,10 +29,9 @@
 
                     const agendaForDay = findAgendaForDay(dayCounter);
 
-                    if (agendaForDay) {
+                    if (agendaForDay.length > 0) {
                         setCellAttributes(cell, agendaForDay);
                     }
-
                     dayCounter++;
                 }
             }
@@ -60,7 +59,7 @@
     }
 
     function findAgendaForDay(day) {
-        return agendaData.find(item => {
+        return agendaData.filter(item => {
             const agendaDate = new Date(item.data);
             return agendaDate.getDate() === day && agendaDate.getMonth() === currentMonth;
         });
@@ -70,9 +69,29 @@
         cell.classList.add('active');
         cell.setAttribute('data-toggle', 'modal');
         cell.setAttribute('data-target', '#agendaModal');
-        cell.setAttribute('data-title', agendaForDay.titulo);
-        cell.setAttribute('data-date', agendaForDay.data);
-        cell.setAttribute('data-description', agendaForDay.descricao);
+
+        // Create an array to store unique attribute values
+        let titles = [];
+        let dates = [];
+        let descriptions = [];
+
+        agendaForDay.forEach(element => {
+            // Store unique attribute values in arrays
+            if (!titles.includes(element.titulo)) {
+                titles.push(element.titulo);
+            }
+            if (!dates.includes(element.data)) {
+                dates.push(element.data);
+            }
+            if (!descriptions.includes(element.descricao)) {
+                descriptions.push(element.descricao);
+            }
+        });
+
+        // Set attribute values using the unique values from arrays
+        cell.setAttribute('data-title', titles.join(', '));
+        cell.setAttribute('data-date', dates.join(', '));
+        cell.setAttribute('data-description', descriptions.join(', '));
     }
 
     function populateCalendar(monthName) {
@@ -86,16 +105,13 @@
     }
 
 
-    function openModal(id) {
+    function openModal(event) {
         const cell = event.target;
-        const title = cell.getAttribute('data-title');
-        const date = new Date(cell.getAttribute('data-date'));
-        const description = cell.getAttribute('data-description');
+        const titles = cell.getAttribute('data-title').split(", ");
+        const dates = cell.getAttribute('data-date').split(", ");
+        const descriptions = cell.getAttribute('data-description').split(", ");
 
-        const formattedDate = formatDate(date);
-        const time = formatTime(date);
-
-        updateModalContent(title, formattedDate, time, description);
+        updateModalContent(titles, dates, descriptions);
         showAgendaModal();
     }
 
@@ -112,11 +128,21 @@
         return `${hours}:${minutes}`;
     }
 
-    function updateModalContent(title, formattedDate, time, description) {
-        document.querySelector(".modal-title").textContent = title;
-        document.querySelector(".data").textContent = formattedDate;
-        document.querySelector(".horario").textContent = time;
-        document.querySelector(".modal-body").textContent = description;
+    function updateModalContent(titles, dates, descriptions) {
+        for (let index = 0; index < titles.length; index++) {
+            const itemClass = `item-${index + 1}`;
+            const item = document.querySelector(`.${itemClass}`);
+
+            item.classList.remove('d-none');
+            item.classList.add('d-flex');
+            item.classList.add('border-bottom');
+
+            // Update attributes for modal title, date, and description
+            item.querySelector('.modal-title').textContent = titles[index];
+            item.querySelector('.data').textContent = formatDate(new Date(dates[index]));
+            item.querySelector('.horario').textContent = formatTime(new Date(dates[index]));
+            item.querySelector('.modal-body').textContent = descriptions[index];
+        }
     }
 
     function showAgendaModal() {
@@ -143,6 +169,14 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         prepareData(monthNames[currentMonth]);
+
+        $('#agendaModal').on('hidden.bs.modal', function() {
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                item.classList.remove('d-flex');
+                item.classList.add('d-none');
+            });
+        });
     });
 
     function prepareData(currentMonth) {
@@ -211,12 +245,59 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header d-flex flex-column">
-                    <h5 class="modal-title" id="confirmationModalLabel"></h5>
-                    <p class="m-0 data"></p>
-                    <p class="horario"></p>
+                <div class="item item-1 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
                 </div>
-                <div class="modal-body">
+                <div class="item item-2 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-3 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-4 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-5 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-6 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="hideModal()" class="btn btn-primary"
