@@ -18,13 +18,13 @@
                         <label>Título
                             <span class="block text-xs font-light text-stone-400">O título da notícia</span>
                         </label>
-                        <input type="text" name="titulo" class="mt-2 px-4 py-2 shadow rounded" value="{{$noticia->titulo}}" />
+                        <input type="text" name="titulo" disabled class="mt-2 px-4 py-2 shadow rounded" value="{{$noticia->titulo}}" />
                     </div>
                     <div class="flex flex-col mb-4">
                         <label>Subtítulo
                             <span class="block text-xs font-light text-stone-400">O subtítulo da notícia</span>
                         </label>
-                        <input type="text" name="subtitulo" class="mt-2 px-4 py-2 shadow rounded" value="{{$noticia->subtitulo}}" />
+                        <input type="text" name="subtitulo" disabled class="mt-2 px-4 py-2 shadow rounded" value="{{$noticia->subtitulo}}" />
                     </div>
                 </div>
                 <div class="mt-6 flex gap-6">
