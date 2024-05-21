@@ -14,6 +14,5 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Agenda::factory(6)->create();
     }
 }

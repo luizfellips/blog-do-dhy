@@ -1,6 +1,6 @@
     <x-login-layout>
         <div class="Link">
-            <a href="{{route('home')}}">Blog Do Dhy</a>
+            <a href="{{route('home')}}">Portal de Notícias</a>
         </div>
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />

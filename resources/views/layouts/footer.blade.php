@@ -4,7 +4,7 @@
         <div class="col-12" id="footer-top">
             <div class="row gx-9 justify-content-start justify-content-md-between align-items-center">
                 <div class="col-6"><a href="#" class="navbar-brand primary-color">
-                        <h1 class="display-6">Blog Do Dhy</h1>
+                        <h1 class="display-6">Portal de Notícias</h1>
                     </a>
                 </div>
                 <div class="col-5 ps-3 gx-0" id="social-icons">

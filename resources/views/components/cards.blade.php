@@ -10,6 +10,14 @@
         <p class="fs-6 text-muted">Confira as notícias mais recentes do mundão</p>
     </div>
 </div>
+
+@if (count($noticias) === 0)
+<div class="container my-2">
+    <div class="row justify-content-center g-2">
+        <h1 class="d-flex justify-content-center g-2 mt-5">Não há notícias registradas no momento.</h1>
+    </div>
+</div>
+@else
 <div class="container my-2">
     <div class="row justify-content-center g-2">
         @foreach ($noticias as $noticia)
@@ -19,5 +27,5 @@
             {{ $noticias->links() }}
         </div>
     </div>
-
 </div>
+@endif

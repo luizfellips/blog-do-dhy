@@ -2,7 +2,7 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="Link">
-            <a href="{{route('home')}}">Blog Do Dhy</a>
+            <a href="{{route('home')}}">Portal de Notícias</a>
         </div>
         <!-- Name -->
         <div>
