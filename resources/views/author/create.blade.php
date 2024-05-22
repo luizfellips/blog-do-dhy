@@ -1,4 +1,16 @@
 <x-layout>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <h2 class="fs-4">We could not register this contact.
+            </h2>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li> - {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/page/styles.css') }}">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -56,13 +68,13 @@
                         <label>Nome do autor
                             <span class="block text-xs font-light text-stone-400">O nome do autor</span>
                         </label>
-                        <input type="text" name="name" class="mt-2 px-4 py-2 shadow rounded" />
+                        <input type="text" name="author[name]" class="mt-2 px-4 py-2 shadow rounded" />
                     </div>
                     <div class="flex flex-col mb-4">
                         <label>Profissão
                             <span class="block text-xs font-light text-stone-400">A profissão do autor</span>
                         </label>
-                        <input type="text" name="job" class="mt-2 px-4 py-2 shadow rounded" />
+                        <input type="text" name="author[job]" class="mt-2 px-4 py-2 shadow rounded" />
                     </div>
                 </div>
 

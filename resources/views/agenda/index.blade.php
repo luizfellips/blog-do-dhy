@@ -77,15 +77,9 @@
 
         agendaForDay.forEach(element => {
             // Store unique attribute values in arrays
-            if (!titles.includes(element.titulo)) {
-                titles.push(element.titulo);
-            }
-            if (!dates.includes(element.data)) {
-                dates.push(element.data);
-            }
-            if (!descriptions.includes(element.descricao)) {
-                descriptions.push(element.descricao);
-            }
+            titles.push(element.titulo);
+            dates.push(element.data);
+            descriptions.push(element.descricao);
         });
 
         // Set attribute values using the unique values from arrays
@@ -110,6 +104,8 @@
         const titles = cell.getAttribute('data-title').split(", ");
         const dates = cell.getAttribute('data-date').split(", ");
         const descriptions = cell.getAttribute('data-description').split(", ");
+
+        console.log(dates);
 
         updateModalContent(titles, dates, descriptions);
         showAgendaModal();

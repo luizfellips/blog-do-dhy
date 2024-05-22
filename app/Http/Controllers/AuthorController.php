@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
-use App\Models\Noticia;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use App\Http\Requests\AuthorRequest;
 
 class AuthorController extends Controller
 {
@@ -18,18 +15,21 @@ class AuthorController extends Controller
         return view('author.create', compact('authors'));
     }
 
-    public function store(Request $request)
+    public function store(AuthorRequest $request)
     {
-        $author = new Author;
-        $author->name = $request->name;
-        $author->job = $request->job;
+        try {
+            Author::create([
+                'name' => $request->input('author.name'),
+                'job' => $request->input('author.job'),
+            ]);
 
-        $author->save();
+            $authors = Author::all();
 
-        $authors = Author::all();
-
-        session()->flash('message', 'Autor registrado com sucesso');
-        return view('author.create', compact('authors'));
+            session()->flash('message', 'Autor registrado com sucesso');
+            return view('author.create', compact('authors'));
+        } catch (\Throwable $th) {
+            return redirect()->route('author.create')->with('message', 'Author could not be created. Please contact dev');
+        }
     }
 
     public function show(Author $author)

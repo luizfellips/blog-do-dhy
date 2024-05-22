@@ -29,10 +29,9 @@
 
                     const agendaForDay = findAgendaForDay(dayCounter);
 
-                    if (agendaForDay) {
+                    if (agendaForDay.length > 0) {
                         setCellAttributes(cell, agendaForDay);
                     }
-
                     dayCounter++;
                 }
             }
@@ -60,7 +59,7 @@
     }
 
     function findAgendaForDay(day) {
-        return agendaData.find(item => {
+        return agendaData.filter(item => {
             const agendaDate = new Date(item.data);
             return agendaDate.getDate() === day && agendaDate.getMonth() === currentMonth;
         });
@@ -71,10 +70,26 @@
         cell.classList.add('isDelete');
         cell.setAttribute('data-toggle', 'modal');
         cell.setAttribute('data-target', '#agendaModal');
-        cell.setAttribute('data-id', agendaForDay.id);
-        cell.setAttribute('data-title', agendaForDay.titulo);
-        cell.setAttribute('data-date', agendaForDay.data);
-        cell.setAttribute('data-description', agendaForDay.descricao);
+
+        // Create an array to store unique attribute values
+        let ids = [];
+        let titles = [];
+        let dates = [];
+        let descriptions = [];
+
+        agendaForDay.forEach(element => {
+            // Store unique attribute values in arrays
+            ids.push(element.id);
+            titles.push(element.titulo);
+            dates.push(element.data);
+            descriptions.push(element.descricao);
+        });
+
+        // Set attribute values using the unique values from arrays
+        cell.setAttribute('data-id', ids.join(', '));
+        cell.setAttribute('data-title', titles.join(', '));
+        cell.setAttribute('data-date', dates.join(', '));
+        cell.setAttribute('data-description', descriptions.join(', '));
     }
 
     function populateCalendar(monthName) {
@@ -89,31 +104,15 @@
     }
 
 
-    function openModal(id) {
+    function openModal(event) {
         const cell = event.target;
-        const dataId = cell.getAttribute('data-id');
-        const title = cell.getAttribute('data-title');
-        const date = new Date(cell.getAttribute('data-date'));
-        const description = cell.getAttribute('data-description');
+        const ids = cell.getAttribute('data-id').split(", ");
+        const titles = cell.getAttribute('data-title').split(", ");
+        const dates = cell.getAttribute('data-date').split(", ");
+        const descriptions = cell.getAttribute('data-description').split(", ");
 
-        const formattedDate = formatDate(date);
-        const time = formatTime(date);
-
-        var form = document.getElementById("form");
-        form.setAttribute("id", 'deleteForm-' + dataId);
-        var actionUrl = '{{ route('agenda.destroy', ['id' => ':id']) }}';
-        actionUrl = actionUrl.replace(':id', dataId);
-        form.setAttribute('action', actionUrl);
-
-        updateModalContent(title, formattedDate, time, description);
+        updateModalContent(ids, titles, dates, descriptions);
         showAgendaModal();
-        setButtonAction(dataId);
-    }
-
-    function setButtonAction(dataId) {
-        $('#confirmDeleteBtn').on('click', function() {
-            $('#deleteForm-' + dataId).submit();
-        });
     }
 
     function formatDate(date) {
@@ -129,11 +128,66 @@
         return `${hours}:${minutes}`;
     }
 
-    function updateModalContent(title, formattedDate, time, description) {
-        document.querySelector(".modal-title").textContent = title;
-        document.querySelector(".data").textContent = formattedDate;
-        document.querySelector(".horario").textContent = time;
-        document.querySelector(".modal-body").textContent = description;
+    function updateModalContent(ids, titles, dates, descriptions) {
+        for (let index = 0; index < titles.length; index++) {
+            const itemClass = `item-${index + 1}`;
+            const item = document.querySelector(`.${itemClass}`);
+
+            item.classList.remove('d-none');
+            item.classList.add('d-flex');
+            item.classList.add('border-bottom');
+
+            // Update attributes for modal title, date, and description
+            item.querySelector('.modal-title').textContent = titles[index];
+            item.querySelector('.data').textContent = formatDate(new Date(dates[index]));
+            item.querySelector('.horario').textContent = formatTime(new Date(dates[index]));
+            item.querySelector('.modal-body').textContent = descriptions[index];
+
+            let form = document.getElementById(`deleteForm-${ids[index]}`);
+            if (!form) {
+                // Create form element
+                form = document.createElement('form');
+                form.setAttribute('method', 'POST');
+                form.setAttribute('id', `deleteForm-${ids[index]}`);
+                item.classList.add('d-flex', 'align-items-center');
+
+
+                // Add CSRF token
+                const csrfTokenInput = document.createElement('input');
+                csrfTokenInput.setAttribute('type', 'hidden');
+                csrfTokenInput.setAttribute('name', '_token');
+                csrfTokenInput.setAttribute('value', '{{ csrf_token() }}');
+                form.appendChild(csrfTokenInput);
+                // You can set actionUrl here if it's available in the scope of this function
+
+                // Add method spoofing for DELETE request
+                const methodInput = document.createElement('input');
+                methodInput.setAttribute('type', 'hidden');
+                methodInput.setAttribute('name', '_method');
+                methodInput.setAttribute('value', 'DELETE');
+                form.appendChild(methodInput);
+
+                var actionUrl = '{{ route('agenda.destroy', ['id' => ':id']) }}';
+                actionUrl = actionUrl.replace(':id', ids[index]);
+                form.setAttribute('action', actionUrl);
+
+                // Create delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.classList.add('btn', 'btn-danger', 'delete-button', 'm-2', 'd-flex');
+                // Add event listener to delete button
+                deleteButton.addEventListener('click', () => {
+                    // Submit the form when delete button is clicked
+                    form.submit();
+                });
+
+                // Append delete button to form
+                form.appendChild(deleteButton);
+
+                // Append form to item
+                item.appendChild(form);
+            }
+        }
     }
 
     function showAgendaModal() {
@@ -160,8 +214,13 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         prepareData(monthNames[currentMonth]);
-        $('#agendaModal').on('hidden.bs.modal', function(e) {
-            $('.deleteForm').attr('id','form');
+
+        $('#agendaModal').on('hidden.bs.modal', function() {
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                item.classList.remove('d-flex');
+                item.classList.add('d-none');
+            });
         });
     });
 
@@ -231,23 +290,63 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header d-flex flex-column">
-                    <h5 class="modal-title" id="confirmationModalLabel"></h5>
-                    <p class="m-0 data"></p>
-                    <p class="horario"></p>
+                <div class="item item-1 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
                 </div>
-                <div class="modal-body">
+                <div class="item item-2 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-3 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-4 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-5 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+                <div class="item item-6 d-none">
+                    <div class="modal-header border-0 d-flex flex-column">
+                        <h5 class="modal-title"></h5>
+                        <p class="m-0 data"></p>
+                        <p class="horario"></p>
+                    </div>
+                    <div class="modal-body">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="d-flex flex-row">
-                        <p class="mx-2 fs-5">Você realmente deseja desmarcar este evento?</p>
-                        <form class="deleteForm" id="form" action="" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button id="confirmDeleteBtn" type="button" class="btn btn-danger"
-                                data-dismiss="modal">Desmarcar</button>
-                        </form>
-                    </div>
+                    <button type="button" onclick="hideModal()" class="btn btn-primary"
+                        data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
