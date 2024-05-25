@@ -4,6 +4,7 @@ Este projeto oferece funcionalidades diversas como login para administrador, ger
 
 ## Descrição
 O Portal de Notícias pode ser utilizado por jornalistas, editores e administradores de sites de notícias para gerenciar e publicar conteúdo online de forma mais eficiente e organizada.
+Possui responsividade para todo tamanho de tela.
 
 ## Funcionalidades Principais
 - Login de Administrador: Os administradores podem acessar o sistema com credenciais seguras.
