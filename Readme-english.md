@@ -19,9 +19,9 @@ The News Portal can be used by journalists, editors, and news site administrator
 
 ## Technologies Used
 
-**Frontend:** HTML, CSS, JavaScript (React, Vue.js, Angular, etc.).
-**Backend:** Node.js, Django, Rails, etc.
-**Database:** MySQL, PostgreSQL, MongoDB, etc.
+**Frontend:** HTML, CSS, JavaScript
+**Backend:** PHP, Laravel
+**Database:** MySQL
 
 ## Development Environment Setup
 
