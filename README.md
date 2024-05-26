@@ -18,9 +18,9 @@ Possui responsividade para todo tamanho de tela.
 
 
 ## Tecnologias Utilizadas
-Frontend: HTML, CSS, JavaScript (React, Vue.js, Angular, etc.).
-Backend: Node.js, Django, Rails, etc.
-Banco de Dados: MySQL, PostgreSQL, MongoDB, etc.
+- Frontend: HTML, CSS, JavaScript
+- Backend: PHP, Laravel
+- Banco de Dados: MySQL
 
 ## Configuração do Ambiente de Desenvolvimento
 1. Clone o repositório: git clone https://github.com/seu-usuario/portal-de-noticias.git
