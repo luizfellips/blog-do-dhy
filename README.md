@@ -1,66 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Portal de Notícias
+O Sistema de Portal de Notícias é um sistema web destinado ao gerenciamento e publicação de notícias online. 
+Este projeto oferece funcionalidades diversas como login para administrador, gerenciamento de notícias, tags, autores, agenda e carrossel de notícias, além de recursos de lixeira para itens deletados.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição
+O Portal de Notícias pode ser utilizado por jornalistas, editores e administradores de sites de notícias para gerenciar e publicar conteúdo online de forma mais eficiente e organizada.
+Possui responsividade para todo tamanho de tela.
 
-## About Laravel
+## Funcionalidades Principais
+- Login de Administrador: Os administradores podem acessar o sistema com credenciais seguras.
+- Gerenciamento de Notícias: Adicionar, editar, visualizar e excluir notícias.
+- Gerenciamento de Tags: Adicionar, editar e excluir tags para categorizar notícias e filtrar a pesquisa.
+- Gerenciamento de Autores: Adicionar, editar e excluir autores de notícias.
+- Gerenciamento de Agenda: Agendar a publicação de notícias para datas específicas.
+- Gerenciamento de Carrossel de Notícias: Configurar notícias em destaque para exibição em um carrossel na página inicial.
+- Lixeira para Itens Deletados: Recuperar ou excluir permanentemente itens deletados.
+- Tela inicial para leitores, permitindo a busca pela notícia atráves da tag ou título
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologias Utilizadas
+- Frontend: HTML, CSS, JavaScript
+- Backend: PHP, Laravel
+- Banco de Dados: MySQL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Configuração do Ambiente de Desenvolvimento
+1. Clone o repositório: git clone https://github.com/seu-usuario/portal-de-noticias.git
+2. Instale as dependências do frontend e do backend através de npm i / npm ci , composer install e php artisan migrate
+3. Configure as variáveis de ambiente necessárias.
+4. Inicie o servidor backend e o servidor frontend com php artisan serve e npm run dev.
 
-## Learning Laravel
+## Imagens
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Imagem 1              | Imagem 2              | Imagem 3              |
+|-----------------------|-----------------------|-----------------------|
+| ![image1](https://github.com/luizfellips/portal-de-noticias/assets/110192027/d4080e1a-b0e5-4891-b107-c62e1a000d2a) | ![image2](https://github.com/luizfellips/portal-de-noticias/assets/110192027/5309accb-49f8-4e33-9a8a-d9d7e18d447a) | ![image3](https://github.com/luizfellips/portal-de-noticias/assets/110192027/0d8d3b4f-a07c-49b2-938d-9093ee1e2f22)
+| Imagem 4              | Imagem 5              | Imagem 6              |
+|-----------------------|-----------------------|-----------------------|
+| ![image4](https://github.com/luizfellips/portal-de-noticias/assets/110192027/db05ead2-2ed2-423b-85cd-26cc5c9e109d)   | ![image5](https://github.com/luizfellips/portal-de-noticias/assets/110192027/d64d91e4-01ab-4124-94ce-90e691ac61db)   | ![image6](https://github.com/luizfellips/portal-de-noticias/assets/110192027/99f28709-ca4a-4d5a-af48-1c263cf23640)   |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![image7](https://github.com/luizfellips/portal-de-noticias/assets/110192027/28366700-fbaf-4a34-87a8-9b26537d9d50)
