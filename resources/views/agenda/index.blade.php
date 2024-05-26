@@ -8,7 +8,6 @@
     @endpush
 
     <script>
-        // Usage example:
         const agendaData = {!! json_encode($agenda->toArray(), JSON_HEX_TAG) !!};
         const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro",
             "Outubro", "Novembro", "Dezembro"
